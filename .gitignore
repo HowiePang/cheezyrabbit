@@ -11,7 +11,7 @@ navigator.xml
 # Go 编译生成的可执行文件
 *.exe
 *.out
-*.test
+*.tes
 #bin/
 #vendor/
 
