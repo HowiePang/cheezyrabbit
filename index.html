@@ -13,31 +13,46 @@
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
         loadSidebar: true,
-        subMaxLevel:5,
+        subMaxLevel:3,
         autoHeader:true,
 
-        // afterRender：DOM已经渲染到真实页面，直接操作页面上真实img标签
-        afterRender(vm) {
-            const mdPath = vm.route.file;
-            const depth = (mdPath.match(/\//g) || []).length;
-            const prefix = "../".repeat(depth);
+        /**
+         * afterEach：每篇md渲染完成后，对输出的HTML字符串做处理
+         * 适配目录结构：每个子文件夹内自带assets文件夹；根目录md使用根目录assets
+         * md源码无需修改，md内统一写 ./assets/xxx.png
+         * @param {string} html 渲染后得到的html文本
+         * @param {object} vm docsify实例，vm.route.file为当前加载md的文件路径
+         */
+        afterEach(html, vm) {
+            // 获取当前正在渲染的md完整文件路径，示例：docker/docker.md
+            const mdFullPath = vm.route.file;
+            // 获取路径为空直接返回，不做处理
+            if (!mdFullPath) return html;
 
-            // 获取页面渲染完成后真实的img节点，包含你写的原生html <img>
-            document.querySelectorAll("#main img").forEach(img=>{
-                let src = img.getAttribute("src");
-                if (!src || src.startsWith("http")) return;
+            // 查找最后一个斜杠位置，分割文件夹路径和文件名
+            const lastSlashPos = mdFullPath.lastIndexOf('/');
+            let mdDir = '';
+            // 如果存在斜杠，代表md在子目录，提取文件夹目录名，例如 docker/docker.md → docker
+            if (lastSlashPos > 0) {
+                mdDir = mdFullPath.substring(0, lastSlashPos);
+            }
 
-                if(src.startsWith("./assets/")){
-                    const newSrc = prefix + src.replace(/^\.\//,"");
-                    img.setAttribute("src", newSrc);
-                }else if(src.startsWith("assets/")){
-                    img.setAttribute("src", prefix + src);
-                }
-            })
+            // mdDir不为空 = 当前md处于子目录下
+            // 将html中 img src="./assets/" 替换为 子目录名/assets/
+            // 例 docker/docker.md → src="docker/assets/"，访问 docker/assets/下图片
+            if (mdDir) {
+                const newSrcPrefix = mdDir + '/assets/';
+                html = html.replace(/src="\.\/assets\//g, `src="${newSrcPrefix}`);
+            }
+            // mdDir为空，代表md位于仓库根目录，不做替换，保留 ./assets/，使用根目录assets文件夹
+
+            return html;
         }
     }
 </script>
+<!-- docsify核心库 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
