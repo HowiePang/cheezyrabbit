@@ -6,10 +6,50 @@
 - ES
     - [es](es/es.md)
 - Golang
-    - [golang](golang)
+    - [golang](golang/golang.md)
 - Grafana
-    - [grafana](grafana)
+    - [grafana](grafana/grafana.md)
 - Haproxy
     - [Haproxy](haproxy/haproxy.md)
 - K8s
-    - [k8s](k8s)
+    - [k8s安装](k8s/k8s_install.md)
+    - [ctr命令](k8s/ctr.md)
+- Liunx
+    - [deb包制作](linux/deb_package.md)
+    - [rpm制作](linux/rpm_package.md)
+    - [其他杂项](linux/others.md)
+    - [包源](linux/package_sources.md)
+    - [单用户模式](linux/single_user_mode.md)
+    - [源码编译](linux/sources_build.md)
+- Nginx
+    - [nginx](nginx/nginx.md)
+- Openwrt
+    - [openwrt](openwrt/openwrt.md)
+- Prometheus
+    - [prometheus](prometheus/prometheus.md)
+- Redis
+    - [redis](redis/redis.md)
+- 服务部署
+    - 代理
+        - [shadowsocks](serversdeploy/proxy/shadowsocks.md)
+        - [simple-ss-proxy](serversdeploy/proxy/simple-ss-proxy.md)
+        - [sing-box](serversdeploy/proxy/sing-box.md)
+        - [v2rag](serversdeploy/proxy/v2rag.md)
+        - [xray](serversdeploy/proxy/xray.md)
+    - 内外穿透
+        - [frp](serversdeploy/tunneling/frp.md)
+        - [goproxy](serversdeploy/tunneling/goproxy.md)
+        - [hysteria](serversdeploy/tunneling/hysteria.md)
+        - [nps](serversdeploy/tunneling/nps.md)
+    - [certbot](serversdeploy/certbot.md)
+    - [confluence](serversdeploy/confluence.md)
+    - [gitlab](serversdeploy/gitlab.md)
+    - [jumpserver](serversdeploy/jumpserver.md)
+    - [mysql](serversdeploy/mysql.md)
+    - [nacos](serversdeploy/nacos.md)
+    - [openvpn](serversdeploy/openvpn.md)
+    - [rustdesk](serversdeploy/rustdesk.md)
+    - [wikijs](serversdeploy/wikijs.md)
+    - [wordpress](serversdeploy/wordpress.md)
+- 其他工具
+    - [tools](sometools/tools.md)
