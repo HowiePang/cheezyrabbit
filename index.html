@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>cheezyrabbit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 给index.html加缓存破坏提示，尽量规避浏览器/GitHub Pages缓存 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 </head>
 <body>
@@ -13,45 +17,50 @@
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
         loadSidebar: true,
-        subMaxLevel:3,
-        autoHeader:true,
+        subMaxLevel: 3,
+        autoHeader: true,
 
         /**
-         * afterEach：每篇md渲染完成后，对输出的HTML字符串做处理
-         * 适配目录结构：每个子文件夹内自带assets文件夹；根目录md使用根目录assets
-         * md源码无需修改，md内统一写 ./assets/xxx.png
-         * 不依赖vm.route.file，直接解析浏览器hash，规避docsify版本bug
-         * @param {string} html 渲染后得到的html文本
+         * ⚠️重要：所有钩子必须写在 plugins 数组内！
+         * docsify 的 afterEach 是插件钩子，不能直接作为顶层属性
          */
-        afterEach(html) {
-            // 读取浏览器hash，示例 #/docker/docker.md
-            let hash = window.location.hash;
-            // 去掉开头 #/
-            let path = hash.replace(/^#\//, '');
-            if (!path) return html;
+        plugins: [
+            /**
+             * 图片路径修复插件
+             * 约定：
+             * 1. 子目录文档 docker/docker.md → 图片放在 docker/assets/
+             * 2. 根目录文档 → 使用仓库根目录 assets/
+             * 3. md源码统一写 ./assets/xxx.png，不用修改任何md文件
+             * 解析 location.hash 获取真实访问路径，规避 vm.route.file 的bug
+             */
+            function fixImagePathPlugin(hook) {
+                hook.afterEach(function (html) {
+                    // 获取地址栏hash，示例 #/docker/docker.md
+                    let hash = window.location.hash;
+                    let path = hash.replace(/^#\//, '');
+                    if (!path) return html;
 
-            // 去掉查询参数
-            path = path.split('?')[0];
+                    // 剔除url查询参数
+                    path = path.split('?')[0];
 
-            // 查找最后一个斜杠位置，分割文件夹路径和文件名
-            const lastSlashPos = path.lastIndexOf('/');
-            let mdDir = '';
-            // 如果存在斜杠，代表md在子目录，提取文件夹目录名，例如 docker/docker.md → docker
-            if (lastSlashPos > 0) {
-                mdDir = path.substring(0, lastSlashPos);
+                    // 分割目录和文件名
+                    const lastSlashPos = path.lastIndexOf('/');
+                    let mdDir = '';
+                    if (lastSlashPos > 0) {
+                        mdDir = path.substring(0, lastSlashPos);
+                    }
+
+                    // 子目录：替换 ./assets/ → dir/assets/
+                    if (mdDir) {
+                        const newPrefix = mdDir + '/assets/';
+                        html = html.replace(/src="\.\/assets\//g, `src="${newPrefix}`);
+                    }
+                    // mdDir为空，根目录文档，不替换，保留 ./assets/，读取根目录assets
+
+                    return html;
+                });
             }
-
-            // mdDir不为空 = 当前md处于子目录下
-            // 将html中 img src="./assets/" 替换为 子目录名/assets/
-            // 例 docker/docker.md → src="docker/assets/"，访问 docker/assets/下图片
-            if (mdDir) {
-                const newSrcPrefix = mdDir + '/assets/';
-                html = html.replace(/src="\.\/assets\//g, `src="${newSrcPrefix}`);
-            }
-            // mdDir为空，代表md位于仓库根目录，不做替换，保留 ./assets/，使用根目录assets文件夹
-
-            return html;
-        }
+        ]
     }
 </script>
 <!-- docsify核心库 -->
