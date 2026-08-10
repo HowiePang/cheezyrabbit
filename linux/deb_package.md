@@ -2,8 +2,6 @@
 
 记录制作各种deb格式的安装包
 
-[TOC]
-
 ## 1、Nginx
 
 制作一个nginx的deb包，可快速移植于其他类debian系统安装；

@@ -1,6 +1,5 @@
 # openwrt
 
-[TOC]
 
 官方网站：https://openwrt.org/zh/start
 

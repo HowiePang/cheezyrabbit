@@ -1,6 +1,5 @@
 # Sing-box
 
-[TOC]
 
 The universal proxy platform.
 

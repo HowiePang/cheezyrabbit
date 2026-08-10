@@ -1,6 +1,5 @@
 # Grafana
 
-[TOC]
 
 **Grafana 知识笔录**
 

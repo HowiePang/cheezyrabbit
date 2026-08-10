@@ -1,6 +1,5 @@
 # Redis
 
-[TOC]
 
 ## 1、keyDB部署
 

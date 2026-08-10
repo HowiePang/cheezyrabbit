@@ -1,7 +1,5 @@
 # Docker
 
-[TOC]
-
 docker学习章节
 
 大量优秀的Docker学习工具：https://github.com/veggiemonk/awesome-docker/blob/master/README.md#terminal

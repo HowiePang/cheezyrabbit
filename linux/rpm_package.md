@@ -2,8 +2,6 @@
 
 制作各种软件的 rpm 包
 
-[TOC]
-
 ## 1、haproxy
 
 基于centos7.9，内核5.15，环境为docker容器环境，openssl版本为1.0.2k

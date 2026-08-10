@@ -1,7 +1,5 @@
 # Haproxy
 
-[TOC]
-
 Haproxy是一款优秀的高性能、可靠的TCP\HTTP负载代理软件；
 
 一般来说，http代理选用Nginx，tcp选用HA用更好一点；

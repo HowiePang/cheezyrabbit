@@ -1,6 +1,5 @@
 # Xray
 
-[TOC]
 
 **基于 vless + reality + gost 科学上网方案**
 

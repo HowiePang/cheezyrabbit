@@ -1,6 +1,5 @@
 # Wiki.js
 
-[TOC]
 
 Wiki.js是一个强大且简洁的开源wiki软件，本站点即基于wikijs技术部署，下面我们将简要介绍部署过程。
 

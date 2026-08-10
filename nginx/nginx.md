@@ -1,6 +1,5 @@
 # Nginx
 
-[TOC]
 
 nginx学习章节
 

@@ -2,7 +2,6 @@
 
 记录源码编译常用软件代码
 
-[TOC]
 
 ## 1、checkinstall
 

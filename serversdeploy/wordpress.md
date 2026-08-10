@@ -1,6 +1,5 @@
 # Wordpress
 
-[TOC]
 
 记录 wordpress 独立站基础底座安装于部署。
 

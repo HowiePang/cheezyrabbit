@@ -1,6 +1,5 @@
 # RustDesk
 
-[TOC]
 
 Rustdesk是一款免费开源的桌面远程软件，可以让用户自己搭建自己的远程服务器使用，既安全又提高体验度；https://rustdesk.com/zh-cn/
 

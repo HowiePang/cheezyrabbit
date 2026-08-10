@@ -2,7 +2,6 @@
 
 Elasticsearch 学习章节
 
-[TOC]
 
 ## 1、安装与搭建
 

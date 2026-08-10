@@ -1,6 +1,5 @@
 # Prometheus
 
-[TOC]
 
 Prometheus官方文档：https://prometheus.io/docs/introduction/overview/
 Alertmanager社区地址：https://github.com/prometheus/alertmanager
