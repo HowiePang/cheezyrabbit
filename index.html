@@ -9,16 +9,19 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+    <!-- 侧边栏折叠插件的folder样式css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css"/>
 </head>
 <body>
 <div id="app"></div>
 <script>
+
     window.$docsify = {
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
         loadSidebar: true,
         sidebar: '/_sidebar.md', // 新增：强制全部使用根目录侧边栏，消除子目录_sidebar.md 404
-        subMaxLevel: 3,
+        subMaxLevel: 0,
         autoHeader: true,
 
         /**
@@ -68,5 +71,7 @@
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 <!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<!-- 只新增这一行折叠js，放在最后 -->
+<script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>
