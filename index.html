@@ -20,21 +20,25 @@
          * afterEach：每篇md渲染完成后，对输出的HTML字符串做处理
          * 适配目录结构：每个子文件夹内自带assets文件夹；根目录md使用根目录assets
          * md源码无需修改，md内统一写 ./assets/xxx.png
+         * 不依赖vm.route.file，直接解析浏览器hash，规避docsify版本bug
          * @param {string} html 渲染后得到的html文本
-         * @param {object} vm docsify实例，vm.route.file为当前加载md的文件路径
          */
-        afterEach(html, vm) {
-            // 获取当前正在渲染的md完整文件路径，示例：docker/docker.md
-            const mdFullPath = vm.route.file;
-            // 获取路径为空直接返回，不做处理
-            if (!mdFullPath) return html;
+        afterEach(html) {
+            // 读取浏览器hash，示例 #/docker/docker.md
+            let hash = window.location.hash;
+            // 去掉开头 #/
+            let path = hash.replace(/^#\//, '');
+            if (!path) return html;
+
+            // 去掉查询参数
+            path = path.split('?')[0];
 
             // 查找最后一个斜杠位置，分割文件夹路径和文件名
-            const lastSlashPos = mdFullPath.lastIndexOf('/');
+            const lastSlashPos = path.lastIndexOf('/');
             let mdDir = '';
             // 如果存在斜杠，代表md在子目录，提取文件夹目录名，例如 docker/docker.md → docker
             if (lastSlashPos > 0) {
-                mdDir = mdFullPath.substring(0, lastSlashPos);
+                mdDir = path.substring(0, lastSlashPos);
             }
 
             // mdDir不为空 = 当前md处于子目录下
