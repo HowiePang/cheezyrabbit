@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>cheezyrabbit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- docsify CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 </head>
 <body>
 <div id="app"></div>
@@ -14,37 +13,31 @@
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
         loadSidebar: true,
-        subMaxLevel: 4,
-        autoHeader: true,
-        // 图片路径兼容你现有的 assets，不用修改md里面图片链接
-        // =========核心钩子：渲染完md，自动修正所有图片路径，不修改源文件=========
-        afterEach(html, vm) {
-            // vm.route.file 当前正在渲染的md文件路径，例如 serversdeploy/certbot.md
+        subMaxLevel:5,
+        autoHeader:true,
+
+        // afterRender：DOM已经渲染到真实页面，直接操作页面上真实img标签
+        afterRender(vm) {
             const mdPath = vm.route.file;
-            // 算出当前md所在目录深度，例如 serversdeploy/ 深度=1，根目录md深度=0
             const depth = (mdPath.match(/\//g) || []).length;
-            // 需要向上回退多少层：depth层就拼接多少个 "../"
             const prefix = "../".repeat(depth);
 
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            const imgs = dom.querySelectorAll("img");
-            imgs.forEach(img=>{
-                const src = img.getAttribute("src");
-                // 只处理非http开头的本地图片，不碰网络图片
-                if(src && !src.startsWith("http") && !src.startsWith("/")){
-                    // 如果路径开头是assets/，自动加上回退前缀
-                    if(src.startsWith("assets/")){
-                        img.setAttribute("src", prefix + src);
-                    }
+            // 获取页面渲染完成后真实的img节点，包含你写的原生html <img>
+            document.querySelectorAll("#main img").forEach(img=>{
+                let src = img.getAttribute("src");
+                if (!src || src.startsWith("http")) return;
+
+                if(src.startsWith("./assets/")){
+                    const newSrc = prefix + src.replace(/^\.\//,"");
+                    img.setAttribute("src", newSrc);
+                }else if(src.startsWith("assets/")){
+                    img.setAttribute("src", prefix + src);
                 }
             })
-            return dom.body.innerHTML;
         }
-        // =============================================================
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-<!-- 搜索插件 -->
-<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
