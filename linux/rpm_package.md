@@ -6,7 +6,7 @@
 
 基于centos7.9，内核5.15，环境为docker容器环境，openssl版本为1.0.2k
 
-先按照此章节把lua进行升级：[haproxy编译](https://home.gztzs.com/pages/viewpage.action?pageId=1015873)
+先按照此章节把lua进行升级：[haproxy编译](../linux/sources_build.md)
 
 ```go
 //安装依赖
@@ -112,7 +112,7 @@ ll rpmbuild/
 
 <img src="./assets/image-20260810120140100.png" alt="image-20260810120140100" style="zoom:50%;" />
 
-### 4、编写spec文件==（非常重要）==
+### 4、编写spec文件<font color="red">（非常重要）</font>
 
 ```go
 cd SPECS
