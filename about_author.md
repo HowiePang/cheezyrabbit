@@ -2,7 +2,7 @@
 
 我是 **Howie，**“兔芝士” 的创建者，一只在技术丛林里奔跑多年的兔子。
 
-<img src="./assets/image-20260810105304713.png" alt="image-20260810105304713" style="zoom:30%;" />
+<img src="./assets/image-20260810105304713.png" alt="image-20260810105304713" style="zoom:20%;" />
 
 ## 职业足迹
 
@@ -49,7 +49,7 @@
 喝杯虚拟茶，啃块知识芝士。谢谢大家！
 
 也可以通过以下方式找到我：
-📧 Email：ph3911665@gmail.com
-💬 Wechat：xxxxxxx
-📕 RedNote：xxxxxxx
+</br>📧 Email：ph3911665@gmail.com
+</br>💬 Wechat：xxxxxxx
+</br>📕 RedNote：xxxxxxx
 

@@ -9,7 +9,7 @@
 
 ### 旧版本
 
-[/k8s/基于kubekey安装并制作k8s离线安装包.pdf](https://wiki.uhowie.com/k8s/基于kubekey安装并制作k8s离线安装包.pdf)
+[基于kubekey安装并制作k8s离线安装包.pdf](https://wiki.uhowie.com/k8s/基于kubekey安装并制作k8s离线安装包.pdf)
 编写：2024-03-31  Howie
 
 ### 新版本
@@ -410,11 +410,11 @@ export KKZONE=cn && kk create cluster -f kk3-offline.yml -a kk-1.31.7-images.tar
 
 ### 1、基于Docker安装
 
-[/k8s/k8s2/基于docker实现k8s_1.29二进制高可用集群.md](https://wiki.uhowie.com/k8s/k8s2/基于docker实现k8s_1.29二进制高可用集群.md)
+[基于docker实现k8s_1.29二进制高可用集群.md](https://wiki.uhowie.com/k8s/k8s2/基于docker实现k8s_1.29二进制高可用集群.md)
 
 ### 2、基于Containerd安装
 
-[/k8s/k8s2/基于containerd实现k8s_1.29二进制高可用集群.pdf](https://wiki.uhowie.com/k8s/k8s2/基于containerd实现k8s_1.29二进制高可用集群.pdf)
+[基于containerd实现k8s_1.29二进制高可用集群.pdf](https://wiki.uhowie.com/k8s/k8s2/基于containerd实现k8s_1.29二进制高可用集群.pdf)
 
 ### 3、疑难问题解决
 

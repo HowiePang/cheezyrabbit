@@ -2,10 +2,10 @@
 
 
 Prometheus官方文档：https://prometheus.io/docs/introduction/overview/
-Alertmanager社区地址：https://github.com/prometheus/alertmanager
-Grafana部署链接：[/tech/grafana](https://wiki.uhowie.com/tech/grafana)
-==持续更新配置和规则参考链接==：https://cnb.cool/uhowie/prometheus
-Promethus 的架构图如下：
+</br>Alertmanager社区地址：https://github.com/prometheus/alertmanager
+</br>Grafana部署链接：[grafana](../grafana/grafana.md)
+</br><font color="red">持续更新配置和规则参考链接</font>：https://cnb.cool/uhowie/prometheus
+</br>Promethus 的架构图如下：
 
 <img src="./assets/image-20260810150548691.png" alt="image-20260810150548691" style="zoom:50%;" />
 
@@ -53,9 +53,8 @@ scrape_configs:
 
 ### Nginx
 
-openresty分支：[基于openresty高性能分支的nginx](https://wiki.uhowie.com/tech/linux/rpm/openresty)
-
-nginx官方：https://github.com/nginx/nginx-prometheus-exporter
+openresty分支：[基于openresty高性能分支的nginx](../linux/rpm_package.md)
+</br>nginx官方：https://github.com/nginx/nginx-prometheus-exporter
 
 ```go
 # 仅本地回环网卡监听，外部网络完全无法访问
@@ -83,7 +82,7 @@ nohup ./nginx-prometheus-exporter --web.listen-address=:29113 -nginx.scrape-uri=
 
 ### Frp
 
-[Frp内网穿透](https://wiki.uhowie.com/tech/servers_deploy/bypass/frp)
+[Frp内网穿透](../serversdeploy/tunneling/frp.md)
 
 ### SSL
 
@@ -265,8 +264,8 @@ receivers:
 ## 2、服务部署
 
 Github下载地址：https://github.com/prometheus/prometheus/releases
-官方下载地址：https://prometheus.io/download/
-笔者环境os为Rocky9.7，配置为2C2G，我们此处
+</br>官方下载地址：https://prometheus.io/download/
+</br>笔者环境os为Rocky9.7，配置为2C2G，我们此处
 promrtheus选用的版本为: **v3.13.2 / 2026-07-29**
 alertmanager的版本为: **v0.33.1 / 2026-07-04**
 
@@ -390,5 +389,5 @@ nohup ./prometheus --config.file=prometheus.yml --web.listen-address=:29090 --st
 
 ### 3、grafana
 
-参考链接：[/tech/grafana](https://wiki.uhowie.com/tech/grafana)
+参考链接：[grafana](../grafana/grafana.md)
 

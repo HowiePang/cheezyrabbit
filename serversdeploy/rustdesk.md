@@ -3,9 +3,9 @@
 
 Rustdesk是一款免费开源的桌面远程软件，可以让用户自己搭建自己的远程服务器使用，既安全又提高体验度；https://rustdesk.com/zh-cn/
 
-**中文安装文档：**https://rustdesk.com/docs/zh-cn/self-host/
+中文安装文档：https://rustdesk.com/docs/zh-cn/self-host/
 
-**笔者环境为：**os为ubuntu 22.04，rustdesk-server版本为1.1.12，客户端版本为1.3.2；
+笔者环境为：os为ubuntu 22.04，rustdesk-server版本为1.1.12，客户端版本为1.3.2；
 
 部署可分为服务端和客户端
 
@@ -74,7 +74,7 @@ cat id_ed25519.pub
 
 <img src="./assets/image-20260810154951972.png" alt="image-20260810154951972" style="zoom:50%;" />
 
-## 3、基于centos7.9部署（附加）
+## 3、基于centos7.9部署（<font color="red">附加</font>）
 
 记录rustdesk基于centos7.9部署
 

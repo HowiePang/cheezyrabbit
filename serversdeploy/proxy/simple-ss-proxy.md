@@ -120,7 +120,7 @@ systemctl enable --now iptables
 
 上面作为之后，接下来就用小火箭客户端工具连接，配置好socks5的配置，再配置好HK的连接配置（48990端口），把socks5的配置进行 “proxy pass” 到 hk 的配置上，开启socks5连接就能访问到美区 ，且出口显示为家庭带宽网络。
 
-## 附加
+## <font color="red">附加</font>
 
 在非ios或者mac系统的客户端上，因为没有小火箭，所有socks5的代理转发非常不便，这时需要在服务器上面安装一个gost作为链式转发，以便win或者安卓上面也能达到小火箭的功能。
 

@@ -3,7 +3,7 @@
 
 ## 1、keyDB部署
 
-==待更新…==
+<font color="red">待更新…</font>
 
 ## 2、redis扩容
 

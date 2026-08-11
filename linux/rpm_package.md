@@ -92,7 +92,8 @@ rpm -qpi haproxy-2.9.11-el7.x86_64.rpm   //不安装检验包
 
 nginx地址：https://nginx.org/en/download.html
 
-headers-more-nginx-module模块：git clone https://github.com/openresty/headers-more-nginx-module.git  （可选，如果要控制HTTP 响应头的话）
+headers-more-nginx-module模块：
+git clone https://github.com/openresty/headers-more-nginx-module.git  （可选，如果要控制HTTP 响应头的话）
 
 ### 2、准备环境
 
@@ -376,7 +377,7 @@ this a nginx which product for penghao
 //安装checkinstallh程序包，参考链接：
 ```
 
-[checkinstall](https://home.gztzs.com/display/zsxx/checkinstall)
+[checkinstall](../linux/sources_build.md)
 
 ```go
 //下载nginx的源码包，解压后进行make编译
@@ -414,7 +415,7 @@ rpm -qpl nginx-1.24.0-rhl7.x86_64.rpm
 
 ### 11、补充3：基于openresty高性能分支的nginx
 
-文章链接：[基于openresty高性能分支的nginx](https://wiki.uhowie.com/tech/linux/rpm/openresty)
+文章链接：[基于openresty高性能分支的nginx](../linux/rpm_package.md)
 
 ### 12、附编译参数（os为Rocky9.3，生产可用）
 

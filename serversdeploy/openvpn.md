@@ -235,7 +235,7 @@ https://izhaojie.com/2024/06/13/install-ubuntu22-openvpn-server-and-win10-client
 
 https://blog.csdn.net/damiaomiao666/article/details/139886164
 
-吊销客户端证书和添加密码认证参考：  [/pictures/openvpn/企业级vpn服务openvpn.pdf](https://wiki.uhowie.com/pictures/openvpn/企业级vpn服务openvpn.pdf)
+吊销客户端证书和添加密码认证参考：  [企业级vpn服务openvpn.pdf](#)
 
 ## 2、客户端安装
 
@@ -352,4 +352,4 @@ route 192.168.8.0 255.255.255.0
 
 ### 3、LINUX
 
-==待更新…==
+<font color="red">待更新…</font>

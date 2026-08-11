@@ -60,7 +60,7 @@ xray x25519    //生成公钥和私钥
 xray uuid      //生成uuid
 ```
 
-### 附：prometheus指标暴露配置
+### <font color="red">附</font>：prometheus指标暴露配置
 
 ```go
 {
@@ -191,7 +191,7 @@ rules:
   - MATCH, AUTO
 ```
 
-### 附：xray客户端配置（Linux无 UI 环境）
+### <font color="red">附</font>：xray客户端配置（Linux无 UI 环境）
 
 桌面版本参考上面即可，此处主要介绍在Linux环境下配置客户端，笔者的环境为国内服务器，Rocky Liunx9.8系统。
 

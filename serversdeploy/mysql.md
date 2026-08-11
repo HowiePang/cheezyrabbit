@@ -35,7 +35,7 @@ rpm -ivh mysql-community-server-8.0.34-1.el7.x86_64.rpm
 
 - 3、配置文件：
   vim /etc/my.cnf
-
+```go
 [mysqld]
 port=3306
 character-set-server=utf8mb4 # 设置编码格式
@@ -50,6 +50,7 @@ default-character-set=utf8mb4
 [client]
 default-character-set=utf8mb4
 socket=/data/mysql/mysql.sock
+```
 
 ==注意此处默认将数据和日志文件都放到了/data目录下以便管理==
 
@@ -205,7 +206,7 @@ socket=/data/mysql/mysql.sock
 建议双机组主备时，待双机都搭建好了，主机最后作数据，包括创建用户账号等，从机保持干净状态，这样才能保证好从机复制到主机的账号信息等！
 
 - 1、配置文件（双机都要）：
-
+```go
 vim /etc/my.cnf    （注意每个mysql服务的server-id 必须不同）
 [client]
 socket=/data/mysql/mysql.sock
@@ -244,15 +245,16 @@ default_authentication_plugin = caching_sha2_password
 innodb_buffer_pool_size = 128m
 [mysql]
 default-character-set=utf8mb4
-
+```
 - 2、Master创建主从复制用户：
-
+```go
 mysql -uroot -pxxxx -h192.168.50.92
 CREATE USER 'repl'@'%' IDENTIFIED BY 'xxxx' ；
 GRANT ALL  ON *.* TO ' repl'@'%';
+```
 
 - 3、所有master/slave库检查远程 clone插件：
-
+```go
 select plugin_name, plugin_status from information_schema.plugins where plugin_name = 'clone';
 
 \#以下从库操作
@@ -275,7 +277,7 @@ select
   else lpad('100%', 7, ' ')
   end as "Done(%)"
   from performance_schema.clone_progress;     #检查克隆情况
-
+```
 - 4、连接到master ,查看File和Position的值
 
 mysql -uroot -pxxxx -h192.168.50.92 -P3306
@@ -284,7 +286,7 @@ flush logs;
 show master status;
 
 - 5、以下从机操作：
-
+```go
 CHANGE REPLICATION SOURCE TO
  SOURCE_HOST='172.30.142.186',       # 主ip
  SOURCE_USER='repl',           # 主中创建的复制用户
@@ -294,7 +296,7 @@ CHANGE REPLICATION SOURCE TO
  GET_SOURCE_PUBLIC_KEY=1;         # 如果使用8.0.23mysql创建用户时默认密码验证方式（caching_sha2_password），需要加上此选项
 
 start slave;
-
+```
 - 6、检查结果（从机操作）
 
 show slave status\G

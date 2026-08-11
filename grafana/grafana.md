@@ -3,7 +3,7 @@
 
 **Grafana 知识笔录**
 
-Alertmanager+Prometheus 部署链接：[/tech/prometheus](https://wiki.uhowie.com/tech/prometheus)
+Alertmanager+Prometheus 部署链接：[prometheus](../prometheus/prometheus.md)
 
 ## 1、服务部署
 

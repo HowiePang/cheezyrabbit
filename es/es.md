@@ -143,9 +143,9 @@ curl -XPUT  "http://ip:httpport/_cluster/settings" -H 'Content-Type: application
 4、设置分片恢复过程中的最大带宽速度
 curl -XPUT "http://127.0.0.1:24100/_cluster/settings" -H 'Content-Type: application/json' -d'{ "transient":{"indices.recovery.max_bytes_per_sec":"500mb"}}'
 5、重新分片为空的主分片
-curl -XPOST  "http://127.0.0.1:24100/_cluster/reroute?pretty" -H 'Content-Type:application/json' -d '{"commands": [{ "allocate_empty_primary": {"index": "indexname", "shard": 2,"node": "EsNode1@81.20.5.24","accept_data_loss":true                                    }}]}'
+curl -XPOST  "http://127.0.0.1:24100/_cluster/reroute?pretty" -H 'Content-Type:application/json' -d '{"commands": [{ "allocate_empty_primary": {"index": "indexname", "shard": 2,"node": "EsNode1@81.20.5.24","accept_data_loss":true }}]}'
 6、重新分配主分片，会尝试将过期副本分片分片为主
-curl -XPOST "http://127.0.0.1:24100/_cluster/reroute?pretty" -H 'Content-Type:application/json' -d '{"commands": [{"allocate_stale_primary": {"index": "index1","shard": 2,"node": "EsNode1@189.39.172.103","accept_data_loss":true                                          }}]}'
+curl -XPOST "http://127.0.0.1:24100/_cluster/reroute?pretty" -H 'Content-Type:application/json' -d '{"commands": [{"allocate_stale_primary": {"index": "index1","shard": 2,"node": "EsNode1@189.39.172.103","accept_data_loss":true }}]}'
 7、清理ES所有缓存
 curl -XPOST "http://ip:port/_cache/clear"
 8、关闭分片自动平衡

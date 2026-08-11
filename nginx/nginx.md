@@ -3,7 +3,7 @@
 
 nginx学习章节
 
-部署于安装参考链接：https://wiki.baidu.com/tech/linux/rpm
+部署于安装参考链接：[nginx安装](../linux/rpm_package.md)
 
 ## 1、基本用法
 
@@ -392,5 +392,5 @@ server {
 
 ## 2、参考资料
 
-==更新中==
+<font color="red">更新中</font>
 
