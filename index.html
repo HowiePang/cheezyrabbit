@@ -9,8 +9,8 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
-    <!-- themeable主题插件基础css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+    <!-- 回到vue主题，搭配dark-mode插件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
     <!-- 侧边栏折叠样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
 
@@ -34,13 +34,10 @@
         sidebar: '/_sidebar.md',
         subMaxLevel: 3,
         autoHeader: true,
-        // 主题切换按钮配置
-        themeable: {
-            dark: {
-                ':root': {
-                    '--theme-color': '#42b983'
-                }
-            }
+        // 暗黑模式插件配置
+        darkMode: {
+            themeColor: '#42b983',
+            autoMatchOsTheme: true // 默认跟随系统明暗，用户可以手动点按钮切换
         },
 
         plugins: [
@@ -79,8 +76,8 @@
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 <!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!-- 主题切换插件（必须放在docsify之后） -->
-<script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+<!-- ✅暗黑模式切换插件（右上角出现太阳/月亮按钮） -->
+<script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode@0/dist/docsify-dark-mode.min.js"></script>
 <!-- prismjs 语法高亮扩展 ini/bash/yaml/go/docker/json -->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
