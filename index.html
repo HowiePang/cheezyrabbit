@@ -8,12 +8,9 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-
-    <!-- 回到vue主题，搭配dark-mode插件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
     <!-- 侧边栏折叠样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
-
     <style>
         .sidebar-nav li.has-sub > ul {
             display: none !important;
@@ -34,11 +31,6 @@
         sidebar: '/_sidebar.md',
         subMaxLevel: 3,
         autoHeader: true,
-        // 暗黑模式插件配置
-        darkMode: {
-            themeColor: '#42b983',
-            autoMatchOsTheme: true // 默认跟随系统明暗，用户可以手动点按钮切换
-        },
 
         plugins: [
             // 图片路径修复
@@ -76,9 +68,7 @@
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 <!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!-- ✅暗黑模式切换插件（右上角出现太阳/月亮按钮） -->
-<script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode@0/dist/docsify-dark-mode.min.js"></script>
-<!-- prismjs 语法高亮扩展 ini/bash/yaml/go/docker/json -->
+<!-- prismjs 语法高亮扩展【解决ini/bash/yaml/go/docker 代码块无颜色】 -->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
