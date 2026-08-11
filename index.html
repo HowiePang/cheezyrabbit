@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>cheezyrabbit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 给index.html加缓存破坏提示，尽量规避浏览器/GitHub Pages缓存 -->
+    <!-- 缓存控制 -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-    <!-- 侧边栏折叠插件普通样式，不用folder模式 -->
+    <!-- 侧边栏折叠样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
-    <!-- 强制：页面刚加载，所有可折叠项默认隐藏子菜单，全部闭合 -->
     <style>
         .sidebar-nav li.has-sub > ul {
             display: none !important;
@@ -29,51 +28,31 @@
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
         loadSidebar: true,
-        sidebar: '/_sidebar.md', // 新增：强制全部使用根目录侧边栏，消除子目录_sidebar.md 404
+        sidebar: '/_sidebar.md',
         subMaxLevel: 3,
         autoHeader: true,
 
-        /**
-         * ⚠️重要：所有钩子必须写在 plugins 数组内！
-         * docsify 的 afterEach 是插件钩子，不能直接作为顶层属性
-         */
         plugins: [
-            /**
-             * 图片路径修复插件
-             * 约定：
-             * 1. 子目录文档 docker/docker.md → 图片放在 docker/assets/
-             * 2. 根目录文档 → 使用仓库根目录 assets/
-             * 3. md源码统一写 ./assets/xxx.png，不用修改任何md文件
-             * 解析 location.hash 获取真实访问路径，规避 vm.route.file 的bug
-             */
+            // 图片路径修复
             function fixImagePathPlugin(hook) {
                 hook.afterEach(function (html) {
-                    // 获取地址栏hash，示例 #/docker/docker.md
                     let hash = window.location.hash;
                     let path = hash.replace(/^#\//, '');
                     if (!path) return html;
-
-                    // 剔除url查询参数
                     path = path.split('?')[0];
-
-                    // 分割目录和文件名
                     const lastSlashPos = path.lastIndexOf('/');
                     let mdDir = '';
                     if (lastSlashPos > 0) {
                         mdDir = path.substring(0, lastSlashPos);
                     }
-
-                    // 子目录：替换 ./assets/ → dir/assets/
                     if (mdDir) {
                         const newPrefix = mdDir + '/assets/';
                         html = html.replace(/src="\.\/assets\//g, `src="${newPrefix}`);
                     }
-                    // mdDir为空，根目录文档，不替换，保留 ./assets/，读取根目录assets
-
                     return html;
                 });
             },
-            // 新增：渲染完成后强制全部折叠
+            // 页面加载完成强制全部折叠侧边栏
             function forceAllCollapse(hook) {
                 hook.doneEach(function () {
                     localStorage.removeItem('sidebar-collapse');
@@ -85,11 +64,18 @@
         ]
     }
 </script>
-<!-- docsify核心库 -->
+<!-- docsify核心 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 <!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!--【改动3】新增折叠插件JS，放在最后 -->
+<!-- prismjs 语法高亮扩展【解决ini/bash/yaml/go/docker 代码块无颜色】 -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-docker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+<!-- 侧边栏折叠JS -->
 <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>
