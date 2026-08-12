@@ -41,6 +41,7 @@ cat /etc/xray/config.json
           "dest": "www.kafkatool.com:443",        // 要偷取的域名
           "serverNames": ["www.kafkatool.com"],   // 要偷取的域名
           "privateKey": "aKlY6HItDUh-dZRxxxxxxxxxxxxxxxxxxxxxxxxx",    // 私钥
+		      "minClientVer": "1.0.0",
           "shortIds": ["b662c7c3"],      //短码，16进制
           "clientFingerprint": "chrome",  //指纹特征
           "show": false
@@ -340,6 +341,7 @@ cat /etc/xray/config-socks.json
           "dest": "www.kafkatool.com:443",
           "serverNames": ["www.kafkatool.com"],
           "privateKey": "IFjsZykhRo25xxxxxxxxxxxxxxxxxxxx",
+		      "minClientVer": "1.0.0",
           "shortIds": ["a462baaa"],
           "clientFingerprint": "chrome",
           "show": false
