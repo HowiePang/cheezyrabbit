@@ -36,6 +36,7 @@
         - [sing-box](serversdeploy/proxy/sing-box.md)
         - [v2rag](serversdeploy/proxy/v2rag.md)
         - [xray](serversdeploy/proxy/xray.md)
+        - [3x-ui](serversdeploy/proxy/3x-ui.md)
     - 内外穿透
         - [frp](serversdeploy/tunneling/frp.md)
         - [goproxy](serversdeploy/tunneling/goproxy.md)
