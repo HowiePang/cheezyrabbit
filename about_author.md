@@ -49,7 +49,7 @@
 喝杯虚拟茶，啃块知识芝士。谢谢大家！
 
 也可以通过以下方式找到我：
-</br>📧 Email：ph3911665@gmail.com
-</br>💬 Wechat：xxxxxxx
+</br>📧 Email：[ph3911665@gmail.com](ph3911665@gmail.com)
+</br>💬 Github：https://github.com/HowiePang
 </br>📕 RedNote：xxxxxxx
 
