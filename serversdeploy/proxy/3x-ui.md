@@ -98,3 +98,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/mhsanaei/3x-ui/master/install.
 
 
 
+## 2、手动安装
+
+上面我们用的在线脚本的方式，接来下介绍一下手动自定义安装。
+

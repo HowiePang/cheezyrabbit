@@ -1,6 +1,5 @@
 # Xray
 
-
 **基于 vless + reality + gost 科学上网方案**
 
 ## 1、服务端部署
@@ -371,3 +370,110 @@ cat /etc/xray/config-socks.json
 }
 ```
 
+## 4、基于 VLESS+WS+CF 方案
+
+上面的 vless + reality 目前还不兼容 cloudflare 的橙色代理，要套CDN隐藏源 IP的话就要用到 websocket 方案。假设域名 www.abc.com 已托管在cf上并开启了橙色代理。
+
+### 1、服务端
+
+服务端xray开启ws的协议，简单配置参考如下。
+
+```go
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "替换成你的UUID"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/etc/letsencrypt/fullchain.pem",
+              "keyFile": "/etc/letsencrypt/privkey.pem"
+            }
+          ]
+        },
+        "wsSettings": {
+          "path": "/"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}
+```
+
+### 2、客户端
+
+移动端直接用现有的ui图形化工具导入3x-ui的配置即可，推荐用shadowrocket；这里主要是介绍linux环境下客户端配置（假设xray服务端ws协议已开启，如上），通常用于国内服务器上Docker等拉取镜像需要。
+
+```go
+// linux环境下的客户端配置参考
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "192.168.xxx.xxx",
+      "port": 1080,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth"
+      }
+    },
+    {
+      "listen": "192.168.xxx.xxx",
+      "port": 1081,
+      "protocol": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "www.abc.com",
+            "port": 443,
+            "users": [
+              {
+                "id": "替换成服务端同一个UUID",
+                "encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "www.abc.com"
+        },
+        "wsSettings": {
+          "path": "/"
+        }
+      }
+    }
+  ]
+}
+```
