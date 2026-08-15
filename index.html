@@ -18,21 +18,33 @@
         .sidebar-nav li.has-sub.open > ul {
             display: block !important;
         }
+        /*====【新增：页脚样式｜优化美观版】====*/
+        .my-docsify-footer {
+            margin-top: 48px;   /* 原来80px，缩小和正文距离 */
+            padding-top: 20px;
+            padding-bottom:24px;
+            border-top: 1px solid #eeeeee; /*变淡分割线，不刺眼 */
+            color: #717171;
+            font-size:13px;
+            text-align:center;
+        }
+        .my-docsify-footer p {
+            margin:6px 0;
+        }
+        .my-docsify-footer a{
+            color:#3eaf7c; /*docsify主题绿色，和站点主题统一*/
+            text-decoration:none;
+            margin:0 6px;
+        }
+        .my-docsify-footer a:hover{
+            text-decoration:underline;
+        }
+        /*====【新增结束】====*/
+
     </style>
 </head>
 <body>
 <div id="app"></div>
-<!-- ============页脚 开始============ -->
-<footer>
-    <p>© 2026 cheezyrabbit</p>
-    <p>
-        <a href="#/">首页</a> |
-        <a href="#/activity">动态</a> |
-        <a href="#/changelog">更新记录</a> |
-        <a target="_blank" href="https://github.com/HowiePang/cheezyrabbit">GitHub仓库</a>
-    </p>
-</footer>
-<!-- ============页脚 结束============ -->
 <script>
 
     window.$docsify = {
@@ -44,6 +56,29 @@
         autoHeader: true,
 
         plugins: [
+            /*====【新增：页脚插件，每渲染完md页面自动追加页脚到文章末尾】====*/
+            function addFooterPlugin(hook){
+                hook.doneEach(function(){
+                    //清除旧页脚，防止重复
+                    document.querySelectorAll('.my-docsify-footer').forEach(el=>el.remove());
+                    const contentWrap = document.querySelector('.markdown-section');
+                    if(!contentWrap) return;
+                    const footerDiv = document.createElement('div');
+                    footerDiv.className = "my-docsify-footer";
+                    footerDiv.innerHTML = `
+<p>© 2023-2026 cheezyrabbit</p>
+<p>
+    <a href="./about_home.md">首页</a>
+    <a href="./about_author.md">作者</a>
+    <a href="#/changelog">更新记录</a>
+    <a target="_blank" href="https://github.com/HowiePang/cheezyrabbit">GitHub仓库</a>
+</p>
+        `;
+                    contentWrap.appendChild(footerDiv);
+                })
+            },
+            /*====结束====*/
+
             // 图片路径修复
             function fixImagePathPlugin(hook) {
                 hook.afterEach(function (html) {
