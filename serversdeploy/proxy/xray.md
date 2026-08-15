@@ -373,6 +373,11 @@ cat /etc/xray/config-socks.json
 ## 4、基于 VLESS+WS+CF 方案
 
 上面的 vless + reality 目前还不兼容 cloudflare 的橙色代理，要套CDN隐藏源 IP的话就要用到 websocket 方案。假设域名 www.abc.com 已托管在cf上并开启了橙色代理。
+</br><font color="red">注意cf橙色端口代理是有限制的，默认http和https端口是有规定的，详细可见官方链接：https://developers.cloudflare.com/fundamentals/reference/network-ports/</font>
+
+**HTTP（明文 80 类）** `80, 8080, 8880, 2052, 2082, 2086, 2095`
+
+**HTTPS（TLS 443 类）** `443, 2053, 2083, 2087, 2096, 8443`
 
 ### 1、服务端
 
