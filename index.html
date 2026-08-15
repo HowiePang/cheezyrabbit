@@ -8,8 +8,10 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-    <!-- 侧边栏折叠样式 -->
+
+    <link id="theme-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+    <link id="theme-dark" rel="stylesheet" disabled href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
     <style>
         .sidebar-nav li.has-sub > ul {
@@ -18,12 +20,12 @@
         .sidebar-nav li.has-sub.open > ul {
             display: block !important;
         }
-        /*====【新增：页脚样式｜优化美观版】====*/
+
         .my-docsify-footer {
-            margin-top: 48px;   /* 原来80px，缩小和正文距离 */
+            margin-top: 48px;
             padding-top: 20px;
             padding-bottom:24px;
-            border-top: 1px solid #eeeeee; /*变淡分割线，不刺眼 */
+            border-top: 1px solid #eeeeee;
             color: #717171;
             font-size:13px;
             text-align:center;
@@ -32,21 +34,52 @@
             margin:6px 0;
         }
         .my-docsify-footer a{
-            color:#3eaf7c; /*docsify主题绿色，和站点主题统一*/
+            color:#3eaf7c;
             text-decoration:none;
             margin:0 6px;
         }
         .my-docsify-footer a:hover{
             text-decoration:underline;
         }
-        /*====【新增结束】====*/
 
+        /* =========圆形小图标按钮========= */
+        #theme-toggle-btn{
+            position:fixed;
+            top:32px;
+            right:80px;
+            z-index:999;
+            width:42px;
+            height:42px;
+            padding:0;
+            cursor:pointer;
+            border-radius:50%;
+            border:none;
+            background:#ffffff;
+            font-size:20px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+            transition: all 0.2s ease;
+        }
+        #theme-toggle-btn:hover{
+            transform: scale(1.08);
+        }
+        #theme-toggle-btn.dark-mode{
+            background:#3a3a3a;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+        .dark-mode .my-docsify-footer{
+            border-top:1px solid #333333;
+        }
     </style>
 </head>
 <body>
 <div id="app"></div>
-<script>
 
+<button id="theme-toggle-btn">🌙</button>
+
+<script>
     window.$docsify = {
         name: 'cheezyrabbit',
         repo: 'HowiePang/cheezyrabbit',
@@ -56,10 +89,8 @@
         autoHeader: true,
 
         plugins: [
-            /*====【新增：页脚插件，每渲染完md页面自动追加页脚到文章末尾】====*/
             function addFooterPlugin(hook){
                 hook.doneEach(function(){
-                    //清除旧页脚，防止重复
                     document.querySelectorAll('.my-docsify-footer').forEach(el=>el.remove());
                     const contentWrap = document.querySelector('.markdown-section');
                     if(!contentWrap) return;
@@ -74,13 +105,11 @@
     <a href="#/changelog.md">更新记录</a>
     <a target="_blank" href="https://github.com/HowiePang/cheezyrabbit">GitHub仓库</a>
 </p>
-        `;
+                    `;
                     contentWrap.appendChild(footerDiv);
                 })
             },
-            /*====结束====*/
 
-            // 图片路径修复
             function fixImagePathPlugin(hook) {
                 hook.afterEach(function (html) {
                     let hash = window.location.hash;
@@ -99,7 +128,6 @@
                     return html;
                 });
             },
-            // 页面加载完成强制全部折叠侧边栏
             function forceAllCollapse(hook) {
                 hook.doneEach(function () {
                     localStorage.removeItem('sidebar-collapse');
@@ -111,18 +139,57 @@
         ]
     }
 </script>
-<!-- docsify核心 -->
+
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-<!-- 搜索插件 -->
 <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!-- prismjs 语法高亮扩展【解决ini/bash/yaml/go/docker 代码块无颜色】 -->
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ini.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-go.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-docker.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
-<!-- 侧边栏折叠JS -->
 <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+
+
+<script>
+    (function(){
+        const lightLink = document.getElementById('theme-light');
+        const darkLink  = document.getElementById('theme-dark');
+        const btn = document.getElementById('theme-toggle-btn');
+        const STORAGE_KEY = 'docsify-theme';
+
+        function applyTheme(mode){
+            const body = document.body;
+            if(mode === 'dark'){
+                lightLink.disabled = true;
+                darkLink.disabled  = false;
+                btn.innerText = '☀️';
+                btn.classList.add('dark-mode');
+                body.classList.add('dark-mode');
+            }else{
+                lightLink.disabled = false;
+                darkLink.disabled  = true;
+                btn.innerText = '🌙';
+                btn.classList.remove('dark-mode');
+                body.classList.remove('dark-mode');
+            }
+            localStorage.setItem(STORAGE_KEY, mode);
+        }
+
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if(saved){
+            applyTheme(saved);
+        }else{
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        btn.addEventListener('click',()=>{
+            const isNowDark = !darkLink.disabled;
+            applyTheme( isNowDark ? 'light' : 'dark' );
+        });
+    })();
+</script>
+
 </body>
 </html>
