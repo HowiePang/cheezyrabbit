@@ -4,7 +4,7 @@
 Prometheus官方文档：https://prometheus.io/docs/introduction/overview/
 </br>Alertmanager社区地址：https://github.com/prometheus/alertmanager
 </br>Grafana部署链接：[grafana](../grafana/grafana.md)
-</br><font color="red">持续更新配置和规则参考链接</font>：https://cnb.cool/uhowie/prometheus
+</br><font color="red">持续更新配置和规则参考链接</font>：https://github.com/HowiePang/prometheus
 </br>Promethus 的架构图如下：
 
 <img src="./assets/image-20260810150548691.png" alt="image-20260810150548691" style="zoom:50%;" />
