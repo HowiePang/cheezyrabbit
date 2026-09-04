@@ -54,3 +54,4 @@
     - [wordpress](serversdeploy/wordpress.md)
 - 其他工具
     - [tools](sometools/tools.md)
+    - [fun_sites](sometools/fun_sites.md)
