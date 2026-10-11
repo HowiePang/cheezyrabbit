@@ -52,6 +52,8 @@
     - [rustdesk](serversdeploy/rustdesk.md)
     - [wikijs](serversdeploy/wikijs.md)
     - [wordpress](serversdeploy/wordpress.md)
+    - [xxl-job](serversdeploy/xxl-job.md)
+    - [rabbitmq](serversdeploy/rabbitmq.md)
 - 其他工具
     - [tools](sometools/tools.md)
     - [fun_sites](sometools/fun_sites.md)

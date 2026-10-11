@@ -12,3 +12,6 @@
 
 ### 2026-09-04
 1、add fun_sites
+
+### 2026-10-11
+1、add "xxl-job & rabbitmq"
