@@ -15,3 +15,6 @@
 
 ### 2026-10-11
 1、add "xxl-job & rabbitmq"
+
+### 2026-10-18
+1、add mysqlsh

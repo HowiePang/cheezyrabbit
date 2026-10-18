@@ -413,3 +413,92 @@ select host  from user where user='root';
 FLUSH PRIVILEGES;
 ```
 
+## 4、mysqlsh备份还原工具
+
+比mysqldump高效，官方多线程逻辑备份工具。
+
+项目链接：https://github.com/mysql/mysql-shell
+
+下载链接：https://github.com/mysql/mysql-shell
+
+备份与数据还原脚本参考如下：
+
+```go
+// 数据库备份
+#!/bin/bash
+USER="root" #备份的用户名 
+PASSWORD='xxxxxxx' #备份的密码
+PORT="3306"
+DATE=`date +%Y-%m-%d`  #用来做备份文件名字的一部分
+NOWDATE=`date +"%y-%m-%d %H:%M:%S"` #当前时间
+OLDDATE=`date +%Y-%m-%d -d '-7 days'`  #本地保存6天数
+
+#指定命令所用的全路径
+MYSQL=/mnt/app/database/mysql_dev_1/bin/mysql
+MYSQLSH=/mnt/app/mysql-shell/bin/mysqlsh
+SOCK=/mnt/app/database/mysql_dev_1/mysql.sock
+
+#创建备份的目录和文件
+BACKDIR=/mnt/app/database/mysql_tmp/alldb
+[ -d ${BACKDIR} ] || mkdir -p ${BACKDIR}
+[ -d ${BACKDIR}/${DATE} ] || mkdir -p ${BACKDIR}/${DATE}
+[ ! -d ${BACKDIR}/${OLDDATE} ] || rm -rf ${BACKDIR}/${OLDDATE} #保存6天 多余的删除最前边的
+
+MYSQLDUMP_LIST=$(${MYSQL} -S ${SOCK} -u${USER} -p"${PASSWORD}" -P${PORT}  -e "show databases"| grep -Evi "database|infor|perfor|mysql|sys")
+echo -e "------ $(date '+%Y-%m-%d %H:%M:%S') \n${MYSQLDUMP_LIST}\n -----------Begin to backup-----------" >> ${BACKDIR}/bakMysqlAlldb.log
+for DBNAME in ${MYSQLDUMP_LIST} ;do 
+        MYDIR=${BACKDIR}/${DATE}/${DBNAME}
+        [ ! -d $MYDIR ] && mkdir -p $MYDIR #创建备份表的目录
+        $MYSQLSH -u${USER} -S ${SOCK} -p"${PASSWORD}"  --js --verbose -e "util.dumpSchemas(['"$DBNAME"'],'"$MYDIR"',{compression:'zstd',threads:8,consistent:false,bytesPerChunk:'5M'})"
+done
+echo -e "------ $(date '+%Y-%m-%d %H:%M:%S') Old files clean over ------" >> ${BACKDIR}/bakMysqlAlldb.log
+echo -e "------ $(date '+%Y-%m-%d %H:%M:%S') \n${MYSQLDUMP_LIST}\n ---------------All done--------------" >> ${BACKDIR}/bakMysqlAlldb.log
+
+function back_notice(){
+date1=`date +"%Y-%m-%d-%H:%M:%S"`
+intranet=`ifconfig |sed -nr "2s/[^0-9\.]+/\n/gp"|sed -n "2p"`
+extranet=`curl ip.sb`
+disk_size=`df -h |sed -n "8p"|awk -F ' ' {'print $5'} |awk -F "%" {'print $1'}`
+dir_path=/mnt/app/database/mysql_tmp/alldb
+file_size1=`du -sh ${dir_path}/${DATE}/rbp|awk '{print $1}' `
+file_size2=`du -sh ${dir_path}/${DATE}/rbp_job|awk '{print $1}' `
+curl -XPOST -s -L 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxxx'  -H 'Content-Type: application/json' -d '
+{
+    "msgtype": "markdown",
+    "markdown": {
+        "content": "                         <font color=\"warning\">**项目名**</font> 服务备份\n
+         >RBP库备份大小: <font color=\"comment\">'${file_size1}'</font>
+         >JOB库备份大小: <font color=\"comment\">'${file_size2}'</font>
+         >数据备份路径: <font color=\"comment\">'${dir_path}'</font>
+         >服务内网地址: <font color=\"comment\">'${intranet}' | 内网IP</font>
+         >服务外网地址: <font color=\"comment\">'${extranet}' | 外网IP</font>
+         >当前磁盘容量: <font color=\"comment\">'${disk_size}'% | / </font>
+         >备份完成时间: <font color=\"warning\">'${date1}'</font>"
+    }
+}'
+}
+```
+
+```go
+// 数据还原
+#!/bin/bash
+USER="root" #备份的用户名 
+PASSWORD='xxxxxxx' #备份的密码
+PORT="3306"
+DATE=`date +%Y-%m-%d`  #用来做备份文件名字的一部分
+NOWDATE=`date +"%y-%m-%d %H:%M:%S"` #当前时间
+OLDDATE=`date +%Y-%m-%d -d '-6 days'`  #本地保存6天数
+
+#指定命令所用的全路径
+MYSQL=/mnt/app/database/mysql_dev_1/bin/mysql
+MYSQLSH=/mnt/app/mysql-shell/bin/mysqlsh
+SOCK=/mnt/app/database/mysql_dev_1/mysql.sock
+
+#恢复数据库
+$MYSQLSH -u${USER} -S ${SOCK} -p"${PASSWORD}"  --js --verbose -e "util.loadDump('/root/2026-01-01/mybackdatadir',{showMetadata:true,threads:16,resetProgress:true,maxBytesPerTransaction:'128M',ignoreVersion:true})"
+```
+
+
+
+
+
