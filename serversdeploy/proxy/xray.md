@@ -191,6 +191,29 @@ rules:
   - MATCH, AUTO
 ```
 
+```go
+// 3x-ui面板导出的链接，客户端配置文件参考如下：
+proxies:
+  - name: "hk01"
+    type: vless
+    server: xxx.demo.com
+    port: 443
+    uuid: "xxxxxxxx"
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: xxxx.com
+    client-fingerprint: chrome
+    encryption: ""
+    reality-opts:
+      public-key: "xxxxxxxx"
+      short-id: "xxxxxxxx"
+      support-x25519mlkem768: true
+```
+
+
+
 ### <font color="red">附</font>：xray客户端配置（Linux无 UI 环境）
 
 桌面版本参考上面即可，此处主要介绍在Linux环境下配置客户端，笔者的环境为国内服务器，Rocky Liunx9.8系统。
