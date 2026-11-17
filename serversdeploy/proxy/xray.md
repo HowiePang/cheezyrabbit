@@ -267,7 +267,8 @@ proxies:
                     "serverName": "www.avaya.com",
                     "publicKey": "qIzG5JoBqnxxxxxxxxxxxxxxxxxx",
                     "shortId": "b662c5c7",
-                    "spiderX": ""
+                    "spiderX": "",
+					"support-x25519mlkem768": true
                 }
             },
             "tag": "proxy"
