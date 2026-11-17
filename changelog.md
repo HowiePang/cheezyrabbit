@@ -18,3 +18,6 @@
 
 ### 2026-10-18
 1、add mysqlsh
+
+### 2026-11-17
+1、update xray client yaml(clash)
